@@ -9,15 +9,15 @@ class LinearRegression:
     """
     def __init__(self):
         #list with the weights
-        self.w = []
+        self.w = None
         #the biais
-        self.b = 0
-        self.error = 0
+        self.b = None
         #parameters used to normalize
-        self.normalize_std = []
-        self.normalize_mean = []
+        self.normalize_std = None
+        self.normalize_mean = None
 
-    def fit(self, X, y, lr=.005, n_epochs=500):
+    @classmethod
+    def fit(self, X, y, lr=.05, n_epochs=500, display=False):
         """Training method to set the weights closer to optimal values
 
         Args:
@@ -34,15 +34,16 @@ class LinearRegression:
         self.b = 0
 
         #training loop
-        for _ in range(n_epochs):
+        for i_ep in range(n_epochs):
             y_pred = np.dot(X,self.w) + self.b
             error = (1/(2*n))*np.sum((y - y_pred)**2)
-            dw = (1/n)*np.dot(X.T ,y - y_pred)
+            dw = (1/n)*(X.T @(y - y_pred))
             db = (1/n)*np.sum((y - y_pred))
-            self.w -= lr*dw
-            self.b -= lr*db
-            self.error = error
+            self.w += lr*dw
+            self.b += lr*db
             errors.append(error)
+            if display: print(f'Epoch {i_ep+1} error = {error}')
+
         return errors
 
     def predict(self, X):
@@ -55,7 +56,7 @@ class LinearRegression:
     def accuracy(self):
         return self.error
 
-    def normalize(self, dataset:np.array):
+    def normalize(self, dataset:np.array, mode=train):
         """_summary_
 
         Args:
@@ -65,9 +66,12 @@ class LinearRegression:
             np.array: dataset normalized
         """
         data = np.copy(dataset)
-        for i in range(data.shape[1]):
+        n, p = data.shape
+        self.normalize_std = np.zeros((p), dtype='float')
+        self.normalize_mean = np.zeros((p), dtype='float')
+        for i in range(p):
             mean, std = data[:,i].mean(), data[:,i].std()
-            self.normalize_std.append(std)
-            self.normalize_mean.append(mean)
+            self.normalize_std[i] = std
+            self.normalize_mean[i] = mean
             data[:,i] = (data[:,i] - mean)/ std
-        return (data[:,:-1], data[:,-1])
+        return (data)
