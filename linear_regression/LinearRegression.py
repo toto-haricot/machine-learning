@@ -1,77 +1,115 @@
-"""[module description]
+"""[bla_bla_bla]
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
 
 class LinearRegression:
-    """model for Linear Regression 
-    """
+
     def __init__(self):
-        #list with the weights
+        #weights and biais
         self.w = None
-        #the biais
         self.b = None
         #parameters used to normalize
-        self.normalize_std = None
-        self.normalize_mean = None
+        self.normalize_std_x = None
+        self.normalize_mean_x = None
+        self.normalize_std_y = None
+        self.normalize_mean_y = None
+        #model accuracy
+        self.accuracy = None
 
-    @classmethod
-    def fit(self, X, y, lr=.05, n_epochs=500, display=False):
-        """Training method to set the weights closer to optimal values
+    def fit(self, X, y, method='gradient_descent', lr=.05, n_epochs=500, display=False):
 
-        Args:
-            X ([array]): the training data set
-            y ([array]): the training targets
-            lr (float, optional): Learning rate. Defaults to .005.
-            n_epochs (int, optional): [description]. Defaults to 500.
-        """
         n, d = X.shape
-
         errors = []
 
         self.w = np.random.normal(size=(d,1))
         self.b = 0
 
-        #training loop
-        for i_ep in range(n_epochs):
-            y_pred = np.dot(X,self.w) + self.b
-            error = (1/(2*n))*np.sum((y - y_pred)**2)
-            dw = (1/n)*(X.T @(y - y_pred))
-            db = (1/n)*np.sum((y - y_pred))
-            self.w += lr*dw
-            self.b += lr*db
-            errors.append(error)
-            if display: print(f'Epoch {i_ep+1} error = {error}')
+        # normalize X and y
+        X, self.normalize_std_x, self.normalize_mean_x = self.normalize(X)
+        y, self.normalize_std_y, self.normalize_mean_y = self.normalize(y)
 
-        return errors
+        if method == 'gradient_descent':
 
-    def predict(self, X):
-        """outputs the prediction
+            for i_ep in range(n_epochs):
+                y_pred = self.forward(X)
+                error = (1/(2*n))*np.sum((y - y_pred)**2)
+                dw = (1/n)*(X.T @(y - y_pred))
+                db = (1/n)*np.sum((y - y_pred))
+                self.w += lr*dw
+                self.b += lr*db
+                errors.append(error)
+                if display: print(f'Epoch {i_ep+1} error = {error}')
+
+        elif method == 'direct':
+
+            X_ = np.hstack([np.ones((n,1)), X])
+            self.b = np.dot(self.pseudo_inverse(X_), y)[0]
+            self.w = np.dot(self.pseudo_inverse(X_), y)[1:]
+
+    def evaluate(self, x_test, y_test):
+        
+        x_test, _, _ = self.normalize(x_test, std=self.normalize_std_x, mean=self.normalize_mean_x)
+        y_test, _, _ = self.normalize(y_test, std=self.normalize_std_y, mean=self.normalize_mean_y)
+        
+        n = x_test.shape[0]
+
+        y_pred = self.forward(x_test)
+        loss = (1/n)*np.sum((y_test - y_pred)**2)
+        self.accuracy = loss
+        return(loss)
+
+    def forward(self, x):
+
+        return(np.dot(x, self.w) + self.b)
+
+
+
+    @staticmethod
+    def normalize(dataset:np.array, std=None, mean=None):
+        """This function normalizes a input data set stored in a numpy array. The data set is center-reduced. 
+        The standart deviations and means to use for centering and reducing can be passed as arguments. If it is not the case,
+        the function will compute it based on the columns values of the data set. 
+
+        Args:
+            dataset (np.array): dataset to normalize
+            std (_type_, optional): standart deviation(s). Defaults to None.
+            mean (_type_, optional): mean(s). Defaults to None.
+
+        Returns:
+            tuple: dataset normalized, means and std used to normalized
         """
-        X = normalize(X)
-        y_pred = np.dot(X.T, self.w)
-        return y_pred
+
+        data = np.copy(dataset)
+        n, p = data.shape
+        
+        if (std is not None) and (mean is not None):
+            assert std.shape[0] == mean.shape[0], 'arguments std and mean should have same dimensions'
+            assert dataset.shape[1] == std.shape[0], f'dataset : {dataset.shape} // std : {std.shape}'
+            # assert dataset.shape[1] == std.shape[0], 'std and mean should have as many columns as dataset'
+            data = np.apply_along_axis(lambda x: (x-mean)/std, 1, data)
+            data = data.reshape((n,p))
+            return(data, std, mean)
+        
+        else: 
+
+            std_ = np.zeros((p), dtype='float')
+            mean_ = np.zeros((p), dtype='float')
+
+            for i in range(p):
+
+                mean, std = data[:,i].mean(), data[:,i].std()
+                std_[i] = std
+                mean_[i] = mean
+                data[:,i] = (data[:,i] - mean)/ std
+
+            return (data, std_, mean_)
+    
+    @staticmethod
+    def pseudo_inverse(X:np.array):
+        return(np.dot(np.linalg.inv(np.dot(X.T,X)),X.T))
+
 
     def accuracy(self):
         return self.error
 
-    def normalize(self, dataset:np.array, mode=train):
-        """_summary_
-
-        Args:
-            dataset (np.array): _description_
-
-        Returns:
-            np.array: dataset normalized
-        """
-        data = np.copy(dataset)
-        n, p = data.shape
-        self.normalize_std = np.zeros((p), dtype='float')
-        self.normalize_mean = np.zeros((p), dtype='float')
-        for i in range(p):
-            mean, std = data[:,i].mean(), data[:,i].std()
-            self.normalize_std[i] = std
-            self.normalize_mean[i] = mean
-            data[:,i] = (data[:,i] - mean)/ std
-        return (data)
