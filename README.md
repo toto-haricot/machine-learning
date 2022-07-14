@@ -9,7 +9,7 @@ Work in progress 🚧 </br>
 
 ### Linear Regression
 
-The repository `linear_regression/` presents a python class `LinearRegression` which can be used to create multi-linear regression models. </br></br>
+The repository `linear_regression/` presents a python class `LinearRegression` which can be used to create multi-linear regression models. </br>
 
 ### Linear Regression Regularized
 
