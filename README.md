@@ -5,7 +5,7 @@ We will go through the following algorithms :
 
 ### Logistic Regression
 
-Work in progress 🚧 </br></br>
+Work in progress 🚧 </br>
 
 ### Linear Regression
 
@@ -13,17 +13,17 @@ The repository `linear_regression/` presents a python class `LinearRegression` w
 
 ### Linear Regression Regularized
 
-Work in progress 🚧 </br></br>
+Work in progress 🚧 </br>
 
 ### Linear Discrimimant Analysis
 
-Work in progress 🚧 </br></br>
+Work in progress 🚧 </br>
 
 ### Multi Layer Perceptron
 
-Work in progress 🚧 </br></br>
+Work in progress 🚧 </br>
 
 ### Quadratic Dicriminant Analysis
 
-Work in progress 🚧 </br></br>
+Work in progress 🚧 </br>
 
