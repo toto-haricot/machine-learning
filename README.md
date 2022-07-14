@@ -7,9 +7,9 @@ We will go through the following algorithms :
 
 Work in progress 🚧 </br></br>
 
-### Linear Regression : `linear_regression/`
+### Linear Regression
 
-This repository presents a python class `LinearRegression` which can be used to create multi-linear regression models. </br></br>
+The repository `linear_regression/` presents a python class `LinearRegression` which can be used to create multi-linear regression models. </br></br>
 
 ### Linear Regression Regularized
 
