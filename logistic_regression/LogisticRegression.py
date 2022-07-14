@@ -1,9 +1,6 @@
-"""[bla_bla_bla]
-"""
-
 import numpy as np
 
-class LinearRegression:
+class LogisticRegression():
 
     def __init__(self):
         #weights and biais
@@ -12,57 +9,57 @@ class LinearRegression:
         #parameters used to normalize
         self.normalize_std_x = None
         self.normalize_mean_x = None
-        self.normalize_std_y = None
-        self.normalize_mean_y = None
-        #model accuracy
-        self.accuracy = None
 
-    def fit(self, X, y, method='gradient_descent', lr=.05, n_epochs=500, display=False):
+    def predict(self, X):
+        """This function outputs the prediction given by the model for an input X. 
+        Note that X should be normalized beforehand.
+
+        Args:
+            X (np.array): input 
+        """
+        probas = self.sigmoid(np.dot(X, self.w) + self.b)
+        y_pred = (probas>.5)*1
+        return(probas)
+
+
+    def fit(self, X, y, normalize=False, n_epoch=500, lr=.05):
+
+        if not normalize: 
+            
+            X, self.normalize_std_x, self.normalize_mean_x = self.normalize(X)
 
         n, d = X.shape
-        errors = []
 
         self.w = np.random.normal(size=(d,1))
         self.b = np.random.normal()
 
-        # normalize X and y
-        X, self.normalize_std_x, self.normalize_mean_x = self.normalize(X)
-        y, self.normalize_std_y, self.normalize_mean_y = self.normalize(y)
+        errors = []
 
-        if method == 'gradient_descent':
+        print(f'Start training for {n_epoch} epochs')
 
-            for i_ep in range(n_epochs):
-                y_pred = self.forward(X)
-                error = (1/(2*n))*np.sum((y - y_pred)**2)
-                dw = (1/n)*(X.T @(y - y_pred))
-                db = (1/n)*np.sum((y - y_pred))
-                self.w += lr*dw
-                self.b += lr*db
-                errors.append(error)
-                if display: print(f'Epoch {i_ep+1} error = {error}')
+        for i in range(n_epoch):
 
-        elif method == 'direct':
+            lc = np.dot(X, self.w) + self.b
+            y_pred = self.sigmoid(lc)
+            dw = (1/d)*np.dot(X.T, (y_pred - y))
+            db = (1/d)*np.sum((y_pred - y))
+            self.w -= lr*dw
+            self.b -= lr*db
+            error = self.loss(y_pred, y)
+            errors.append(error)
 
-            X_ = np.hstack([np.ones((n,1)), X])
-            self.b = np.dot(self.pseudo_inverse(X_), y)[0]
-            self.w = np.dot(self.pseudo_inverse(X_), y)[1:]
+        return errors
 
-    def evaluate(self, x_test, y_test):
-        
-        x_test, _, _ = self.normalize(x_test, std=self.normalize_std_x, mean=self.normalize_mean_x)
-        y_test, _, _ = self.normalize(y_test, std=self.normalize_std_y, mean=self.normalize_mean_y)
-        
-        n = x_test.shape[0]
 
-        y_pred = self.forward(x_test)
-        loss = (1/n)*np.sum((y_test - y_pred)**2)
-        self.accuracy = loss
-        return(loss)
+    @staticmethod
+    def sigmoid(x):
+        return(1/(1+np.exp(-x)))
 
-    def forward(self, x):
-
-        return(np.dot(x, self.w) + self.b)
-
+    @staticmethod
+    def loss(y_pred, y_true):
+        m = len(y_pred)
+        assert len(y_pred) == len(y_true), 'predictions and target should have same lengths'
+        return(-np.mean(y_true*(np.log(y_pred)) + (1-y_true)*(np.log(1-y_pred))))
 
     @staticmethod
     def normalize(dataset:np.array, std=None, mean=None):
@@ -103,12 +100,4 @@ class LinearRegression:
                 data[:,i] = (data[:,i] - mean)/ std
 
             return (data, std_, mean_)
-    
-    @staticmethod
-    def pseudo_inverse(X:np.array):
-        return(np.dot(np.linalg.inv(np.dot(X.T,X)),X.T))
-
-
-    def accuracy(self):
-        return self.error
 
