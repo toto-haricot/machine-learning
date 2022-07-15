@@ -9,20 +9,22 @@ class LogisticRegression():
         #parameters used to normalize
         self.normalize_std_x = None
         self.normalize_mean_x = None
-
-    def predict(self, X):
-        """This function outputs the prediction given by the model for an input X. 
-        Note that X should be normalized beforehand.
-
-        Args:
-            X (np.array): input 
-        """
-        probas = self.sigmoid(np.dot(X, self.w) + self.b)
-        y_pred = (probas>.5)*1
-        return(probas)
-
+        #performances
+        self.accuracy = 0
 
     def fit(self, X, y, normalize=False, n_epoch=500, lr=.05):
+        """This function implements gradient descent for learning the weights and biais that minimize the loss function
+
+        Args:
+            X (np.array): inputs
+            y (np.array): labels
+            normalize (bool, optional): If the dataset is already normalized turn to True. Defaults to False.
+            n_epoch (int, optional): Number of epochs for the gradient descent. Defaults to 500.
+            lr (float, optional): Learning rate. Defaults to .05.
+
+        Returns:
+            list: records of the training loss for each epoch
+        """
 
         if not normalize: 
             
@@ -37,9 +39,10 @@ class LogisticRegression():
 
         print(f'Start training for {n_epoch} epochs')
 
+        #start the gradient descent
         for i in range(n_epoch):
 
-            lc = np.dot(X, self.w) + self.b
+            lc = (np.dot(X, self.w) + self.b)
             y_pred = self.sigmoid(lc)
             dw = (1/d)*np.dot(X.T, (y_pred - y))
             db = (1/d)*np.sum((y_pred - y))
@@ -50,6 +53,40 @@ class LogisticRegression():
 
         return errors
 
+    def predict(self, X):
+        """This function outputs the prediction given by the model for an input X. 
+        Note that X should be normalized beforehand.
+
+        Args:
+            X (np.array): input 
+        """
+        probas = self.sigmoid(np.dot(X, self.w) + self.b)
+        y_pred = (probas>.5)*1
+        return(y_pred)
+
+    def evaluate(self, X, y, normalize=True):
+        """This function will evaluate the model accuracy on the dataset passed in argument. We suggest to pass in X_test 
+        and y_test to evaluate accuracy on the testing dataset. 
+
+        Args:
+            X (np.array): testing input
+            y (np.array): testing labels
+            normalize (bool, optional): If the dataset is already normalized turn to True. Defaults to False.
+
+        Returns:
+            float: accuracy
+        """
+
+        if not normalize:
+
+            X, _, _ = self.normalize(X, std=self.normalize_std_x, mean=self.normalize_mean_x)
+
+        y_pred = self.predict(X)
+        n_pred = y.shape[0]
+        accuracy = np.sum(y_pred == y)/n_pred
+        self.accuracy = accuracy
+        return(accuracy)
+
 
     @staticmethod
     def sigmoid(x):
@@ -59,7 +96,7 @@ class LogisticRegression():
     def loss(y_pred, y_true):
         m = len(y_pred)
         assert len(y_pred) == len(y_true), 'predictions and target should have same lengths'
-        return(-np.mean(y_true*(np.log(y_pred)) + (1-y_true)*(np.log(1-y_pred))))
+        return(-np.mean(y_true*(np.log(y_pred)) - (1-y_true)*(np.log(1-y_pred))))
 
     @staticmethod
     def normalize(dataset:np.array, std=None, mean=None):
