@@ -1,4 +1,4 @@
-"""[bla_bla_bla]
+"""class for building linear regression models
 """
 
 import numpy as np
@@ -18,6 +18,17 @@ class LinearRegression:
         self.accuracy = None
 
     def fit(self, X, y, method='gradient_descent', lr=.05, n_epochs=500, display=False):
+        """method to train the model at giving better predictions. Concretely is will adjust weights
+        and biais with gradient descent to minimize the loss
+
+        Args:
+            X (np.array): input training set
+            y (np.array): output training set
+            method (str, optional): training method. Can be 'gradient_descent' (default) or 'direct'.
+            lr (float, optional): learning rate. Defaults to .05.
+            n_epochs (int, optional): number of epochs in training loop. Defaults to 500.
+            display (bool, optional): select True to have updates on the error for each epoch. Defaults to False.
+        """
 
         n, d = X.shape
         errors = []
@@ -47,8 +58,14 @@ class LinearRegression:
             self.b = np.dot(self.pseudo_inverse(X_), y)[0]
             self.w = np.dot(self.pseudo_inverse(X_), y)[1:]
 
-    def evaluate(self, x_test, y_test):
-        
+    def evaluate(self, x_test:np.array, y_test:np.array):
+        """method to evaluate the model accuracy on the testing, which is normalized with same parameters as 
+        training set (mean and standart deviation)
+
+        Args:
+            x_test (np.array): input testing set
+            y_test (np.array): output testing set
+        """
         x_test, _, _ = self.normalize(x_test, std=self.normalize_std_x, mean=self.normalize_mean_x)
         y_test, _, _ = self.normalize(y_test, std=self.normalize_std_y, mean=self.normalize_mean_y)
         
@@ -60,7 +77,11 @@ class LinearRegression:
         return(loss)
 
     def forward(self, x):
+        """simple method to get the prediction of the model for a set of inputs
 
+        Args:
+            x (np.array): input set
+        """
         return(np.dot(x, self.w) + self.b)
 
 
@@ -106,6 +127,12 @@ class LinearRegression:
     
     @staticmethod
     def pseudo_inverse(X:np.array):
+        """function to compute the pseudo inverse of a matrix. We can note that if X is inversible, the pseudo
+        inverse is equal to the inverse matrix
+
+        Args:
+            X (np.array): any matrix to inverse
+        """
         return(np.dot(np.linalg.inv(np.dot(X.T,X)),X.T))
 
 
