@@ -1,3 +1,6 @@
+"""class for building logistic regression models
+"""
+
 import numpy as np
 
 class LogisticRegression():
