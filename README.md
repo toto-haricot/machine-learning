@@ -17,7 +17,7 @@ Work in progress 🚧 </br>
 
 ### Linear Discrimimant Analysis
 
-Work in progress 🚧 </br>
+The repository `lda/` presents a python class `LDA` which can be used to create multi-class classification models. We aim to imrove this repository to later be able to use linear discriminant analysis for dimension reduction.</br>
 
 ### Multi Layer Perceptron
 
