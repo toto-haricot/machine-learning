@@ -1,3 +1,5 @@
+"""class for building linear discriminant analysis models
+"""
 
 import numpy as np
 import pandas as pd
