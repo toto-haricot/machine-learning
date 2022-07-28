@@ -1,14 +1,14 @@
 # Machine Learning 👩‍💻
 
 The aim of this repository is to **implement from scratch**, using only `numpy` and python most basic libraries, the classical machine learning algorithms. Here comes the list of all algorithms we wish to implement : 
-- [x] [Linear Regression](linear-regression)
-- [x] [Linear Regression Regularized](linear-regression-regularized)
-- [x] [Logistic Regression](logistic-regression)
-- [x] [Linear Discriminant Analysis](linear-discriminant-analysis)
-- [ ] [Multi Layer Perceptron](multi-layer-perceptron)
-- [x] [Naïve Bayes](naïve-bayes)
-- [ ] [Quadratic Discriminant Analysis](quadratic-discriminant-analysis)
-- [x] [Random Forest](random-forest)
+- [x] [Linear Regression](#linear-regression-)
+- [x] [Linear Regression Regularized](#linear-regression-regularized-)
+- [x] [Logistic Regression](#logistic-regression-)
+- [x] [Linear Discriminant Analysis](#linear-discriminant-analysis-)
+- [ ] [Multi Layer Perceptron](#multi-layer-perceptron-)
+- [x] [Naïve Bayes](#naïve-bayes-)
+- [ ] [Quadratic Discriminant Analysis](#quadratic-discriminant-analysis-)
+- [x] [Random Forest](#random-forest)
 
 For each algo we create a specific repository in which you can find the python implementation from scratch along with a jupyter notebook which is meant to train and test our code on some open source datasets. To provide a better understanding of the algorithm implemented, we provide in each repository a `readme.md` file that states the matematics that run the algo. <br><br>
 
