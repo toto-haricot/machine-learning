@@ -17,7 +17,7 @@ In the `datasets/` folder you will find several classic datasets that are used t
 <ins>Note</ins> : In this repository we will propose an implementation for vanilla neural network in the `mlp` (multi layer perceptron) repository but we won't go further into deep learning. Deep learning projects will be sharing in another coming repository. <br>
 
 # Models 🗳️
-## Linear Regression ✅
+## Linear Regression
 
 Linear regression is probably the most common machine learning algorithm. Most of us had already used it even before starting to learn data science or artificial intelligence. This algorithm deals with <font color="orange"> **regression** </font> problems and it can also be applied to classification but it's less relevent. The assumption made is that the output $y$ of an input $x$ is linear combination that input with a set of parameters $\omega$. <br><br>
 
