@@ -8,6 +8,7 @@ The aim of this repository is to **implement from scratch**, using only `numpy` 
 - [ ] [Multi Layer Perceptron](multi-layer-perceptron)
 - [x] [Naïve Bayes](naïve-bayes)
 - [ ] [Quadratic Discriminant Analysis](quadratic-discriminant-analysis)
+- [x] [Random Forest](random-forest)
 
 For each algo we create a specific repository in which you can find the python implementation from scratch along with a jupyter notebook which is meant to train and test our code on some open source datasets. To provide a better understanding of the algorithm implemented, we provide in each repository a `readme.md` file that states the matematics that run the algo. <br><br>
 
@@ -47,3 +48,7 @@ Logistic regression is probably the most famous classification algorithm. It is 
 ## Quadratic Dicriminant Analysis 🚧
 
 *Coming soon* <br><br>
+
+## Random Forest ✅
+
+*First draft of code available and description coming very soon* <br><br>
