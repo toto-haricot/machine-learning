@@ -1,7 +1,7 @@
 # Machine Learning 👩‍💻
 
 The aim of this repository is to **implement from scratch**, using only `numpy` and python most basic libraries, the classical machine learning algorithms. Here comes the list of all algorithms we wish to implement : 
-- [x] [Linear Regression](linear-regression)
+- [x] [Linear Regression](linear-regression-✅)
 - [x] [Linear Regression Regularized](linear-regression-regularized)
 - [x] [Logistic Regression](logistic-regression)
 - [x] [Linear Discriminant Analysis](linear-discriminant-analysis)
