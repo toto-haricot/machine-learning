@@ -2,7 +2,7 @@
 
 In this repository we present an **implementation from scratch**, using only `numpy` and python most basic libraries, of the classical machine learning algorithms. Here comes the list of all algorithms we wish to implement : 
 
-- [ ] [K-Means](#k-means-)
+- [x] [K-Means](#k-means-)
 - [x] [Linear Regression](#linear-regression-)
 - [ ] [Linear Regression Regularized](#linear-regression-regularized-)
 - [x] [Logistic Regression](#logistic-regression-)
@@ -19,9 +19,11 @@ In the `datasets/` folder you will find several classic open source datasets tha
 <ins>Note</ins> : In this repository we will propose an implementation for vanilla neural network in the `mlp` (multi layer perceptron) repository but we won't go further into deep learning. Deep learning projects will be sharing in another coming repository. <br>
 
 # Models 🗳️
-## K-Means 🚧
+## K-Means ✅
 
-*Coming soon* <br><br>
+K-Means is a very simple-to-understand **clustering algorithm**. We start by setting the parameter K which represents the number of clusters we are looking for. Then we initialize K points at random as our clusters **centroïds**. As its name suggests, a centroïd is simply the center point of a cluster. Once our centroïds are randomly choosen, we compute for each point its Euclidien Distances to the centroïds. We form the clusters by assigning each point to its closest centroïd. After that we get K groups of data and we will compute the centers of these clusters which we will assign as the new centroïds. Then we can once again form the clusters, and compute the centroïds, and form new clusters, and compute the new centroïds and so on...<br>
+
+More details and illustrations on the K-Means algorithm will soon be available in the coming `k_mean/readme.md` file. <br><br>
 
 ## Linear Regression ✅
 
