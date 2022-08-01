@@ -1,6 +1,6 @@
 # Machine Learning 👩‍💻
 
-The aim of this repository is to **implement from scratch**, using only `numpy` and python most basic libraries, the classical machine learning algorithms. Here comes the list of all algorithms we wish to implement : 
+In this repository we present an **implementation from scratch**, using only `numpy` and python most basic libraries, of the classical machine learning algorithms. Here comes the list of all algorithms we wish to implement : 
 
 - [ ] [K-Means](#k-means-)
 - [x] [Linear Regression](#linear-regression-)
@@ -12,9 +12,9 @@ The aim of this repository is to **implement from scratch**, using only `numpy` 
 - [ ] [Quadratic Discriminant Analysis](#quadratic-discriminant-analysis-)
 - [x] [Random Forest](#random-forest-)
 
-For each algo we create a specific repository in which you can find the python implementation from scratch along with a jupyter notebook which is meant to train and test our code on some open source datasets. To provide a better understanding of the algorithm implemented, we provide in each repository a `readme.md` file that states the matematics that run the algo. <br><br>
+For each algo we create a specific repository in which you can find the python implementation from scratch along with a jupyter notebook which is meant to train and test our code on some open source datasets. To provide a better understanding of the algorithm implemented, you will find in each repository a `readme.md` file that goes through the matematics that run the algo. <br><br>
 
-In the `datasets/` folder you will find several classic datasets that are used to train and test some machine learning models. <br><br>
+In the `datasets/` folder you will find several classic open source datasets that we will use to train and test our models. In addition a python module called `utils.py` gives some useful functions to work with the datasets.<br><br>
 
 <ins>Note</ins> : In this repository we will propose an implementation for vanilla neural network in the `mlp` (multi layer perceptron) repository but we won't go further into deep learning. Deep learning projects will be sharing in another coming repository. <br>
 
@@ -27,7 +27,7 @@ In the `datasets/` folder you will find several classic datasets that are used t
 
 Linear regression is probably the most common machine learning algorithm. Most of us had already used it even before starting to learn data science or artificial intelligence. This algorithm deals with <font color="orange"> **regression** </font> problems and it can also be applied to classification but it's less relevent. The assumption made is that the output $y$ of an input $x$ is linear combination that input with a set of parameters $\omega$. <br><br>
 
-Our code is done in a way that allows the model to be used for multi-linear regression. <br>
+Our code is done in a way that allows the model to be used for multi-linear regression. <br><br>
 
 ## Linear Regression Regularized 🚧
 
