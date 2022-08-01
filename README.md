@@ -4,7 +4,7 @@ In this repository we present an **implementation from scratch**, using only `nu
 
 - [ ] [K-Means](#k-means-)
 - [x] [Linear Regression](#linear-regression-)
-- [x] [Linear Regression Regularized](#linear-regression-regularized-)
+- [ ] [Linear Regression Regularized](#linear-regression-regularized-)
 - [x] [Logistic Regression](#logistic-regression-)
 - [x] [Linear Discriminant Analysis](#linear-discriminant-analysis-)
 - [ ] [Multi Layer Perceptron](#multi-layer-perceptron-)
