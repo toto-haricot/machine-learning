@@ -4,15 +4,21 @@ import numpy as np
 class KMeans():
 
     def __init__(self):
-
         # model parameters
         self.K = None
         self.centroids = None
-
         # evaluation on labeled data
         self.accuracy = None
 
+
     def fit(self, X_train:np.array, K:int):
+        """This method will look for K clusters in the dataset X_train following
+        K-Means algorithm method. 
+
+        Args:
+            X_train (np.array): training dataset
+            K (int): number of clusters to look for
+        """
         
         self.K = K
         n, d = X_train.shape
@@ -37,10 +43,16 @@ class KMeans():
         return(predictions)
 
 
-
-
     def search_centroids(self, X_:np.array):
+        """This function will compute the coordinates of the centroids for each class
+        of the input dataset. 
 
+        Args:
+            X_ (np.array): datasets with predicted classes in last column 
+
+        Returns:
+            np.array: centroids coordinates 
+        """
         n, d = X_.shape
         classes = np.uniques(X_[:,-1])
         new_centroids = np.zeros((self.K, d-1))
@@ -54,8 +66,6 @@ class KMeans():
         return new_centroids
 
 
-
-
     @staticmethod
     def give_class(X_train:np.array, K_centroids:np.array):
         """For each data point of X_train we compute the closest centroid based on
@@ -63,7 +73,7 @@ class KMeans():
 
         Args:
             X_train (np.array): data points
-            K_centroids (np.array): K centroid points
+            K_centroids (np.array): coordinates of the centroids
         """
 
         n, d = X_train.shape
@@ -83,7 +93,12 @@ class KMeans():
     
     @staticmethod
     def changes(new_classes:np.array, old_classes:np.array):
+        """This static method returns the number of changes between the two input
+        vector new_classes and old_classes
 
+        Returns: 
+            int: number of different values
+        """
         return(np.sum(new_classes == old_classes))
 
 
