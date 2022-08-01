@@ -13,7 +13,7 @@ class KMeans():
         self.accuracy = None
 
 
-    def fit(self, X_train:np.array, K:int, n_epochs_max=200, display=False):
+    def fit(self, X_train:np.array, K:int, n_epochs_max=200, display=True):
         """This method will look for K clusters in the dataset X_train following
         K-Means algorithm method. 
 
@@ -32,28 +32,14 @@ class KMeans():
 
         self.centroids = initial_centroids
 
-        print(f"Initial centroïds : {initial_centroids}\n")
-
         predictions = self.give_class(X_train, initial_centroids)
         dataset = np.hstack([X_train, predictions])
-
-        if display:
-            plt.figure(figsize=(12, 7))
-            plt.scatter(x=dataset[:,0], y=dataset[:,1], c=dataset[:,2])
-            plt.scatter(x=initial_centroids[:,0], y=initial_centroids[:,1], c='r')
-            plt.show()
-
-        # print(f"First predicitions : {predictions}\n")
 
         keep_going = True
 
         while keep_going:
 
-            print(f"Epoch {n_epoch}")
-
             dataset = np.hstack([X_train, predictions])
-
-            # print(dataset, '\n\n')
 
             centroids = self.search_centroids(dataset)
             self.centroids = centroids
@@ -64,19 +50,18 @@ class KMeans():
 
             if display:
                 plt.figure(figsize=(12, 7))
-                plt.scatter(x=new_dataset[:,0], y=new_dataset[:,1], c=new_dataset[:,2])
+                plt.title(f"Epoch {n_epoch-1}")
+                plt.scatter(x=dataset[:,0], y=dataset[:,1], c=dataset[:,2])
                 plt.scatter(x=centroids[:,0], y=centroids[:,1], c='r')
                 plt.show()
 
-            if n_epoch >= n_epochs_max: keep_going=False
-            if changes == 0: keep_going=False
-
-            print(f"Changes : {changes} \n\n")
+            if (n_epoch >= n_epochs_max) or (changes == 0): keep_going=False
 
             predictions = new_predictions
             n_epoch += 1
 
-        return(initial_centroids, centroids, dataset, new_dataset)
+        print(f"End of clustering\n\t{n_epoch} epochs done \n\t{changes} changes on last epochs ")
+        return(dataset)
 
 
     def search_centroids(self, X_:np.array):
