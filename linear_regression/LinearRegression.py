@@ -9,6 +9,9 @@ class LinearRegression:
         #weights and biais
         self.w = None
         self.b = None
+        #regularization
+        self.regularization_type = None
+        self.regularization_coef = None
         #parameters used to normalize
         self.normalize_std_x = None
         self.normalize_mean_x = None
@@ -17,7 +20,10 @@ class LinearRegression:
         #model accuracy
         self.accuracy = None
 
-    def fit(self, X, y, method='gradient_descent', lr=.05, n_epochs=500, display=False):
+
+    def fit(self, X, y, regularization_type=None, regularization_coef=None, method='gradient_descent', lr=.05, 
+            n_epochs=500, display=False):
+
         """method to train the model at giving better predictions. Concretely is will adjust weights
         and biais with gradient descent to minimize the loss
 
@@ -33,8 +39,13 @@ class LinearRegression:
         n, d = X.shape
         errors = []
 
+        # initializing weight and biais
         self.w = np.random.normal(size=(d,1))
         self.b = np.random.normal()
+
+        # initializing regularization parameters
+        self.regularization_type = regularization_type
+        self.regularization_coef = regularization_coef
 
         # normalize X and y
         X, self.normalize_std_x, self.normalize_mean_x = self.normalize(X)
@@ -42,21 +53,72 @@ class LinearRegression:
 
         if method == 'gradient_descent':
 
-            for i_ep in range(n_epochs):
+            for epoch in range(n_epochs):
                 y_pred = self.forward(X)
                 error = (1/(2*n))*np.sum((y - y_pred)**2)
-                dw = (1/n)*(X.T @(y - y_pred))
-                db = (1/n)*np.sum((y - y_pred))
+                dw = self.derivative_weights(X, y, y_pred, n, reg=regularization_type, coef=regularization_coef)
+                db = self.derivative_biais(y, y_pred, n, reg=regularization_type, coef=regularization_coef)
                 self.w += lr*dw
                 self.b += lr*db
                 errors.append(error)
-                if display: print(f'Epoch {i_ep+1} error = {error}')
+                if display: print(f'Epoch {epoch+1} error = {error}')
 
         elif method == 'direct':
 
             X_ = np.hstack([np.ones((n,1)), X])
             self.b = np.dot(self.pseudo_inverse(X_), y)[0]
             self.w = np.dot(self.pseudo_inverse(X_), y)[1:]
+
+    def derivative_weights(self, X:np.array, y:np.array, y_pred:np.array, n:int, reg:str=None, coef:float=None):
+        """method to compute the derivatives of the weigths depending on the current predictions
+
+        Args:
+            X (np.array): input training set
+            y (np.array): output training set
+            y_pred (np.array): output predictions
+            n (int): number of samples in training set
+            reg (str, optional): regularization function available are "lasso" and "ridge"
+            coef (float, optional): regularizations coefficient usually called lambda
+
+        Returns:
+            np.array: derivatives of the weights
+        """
+        if not reg:
+            return (1/n)*(X.T @(y - y_pred))
+
+        assert coef, "can't compute regularized regression without lambda"
+
+        elif reg == "ridge":
+            return (1/n)*(X.T@(y - y_pred) + coef*self.w)
+
+        elif reg == "lasso":
+            return (1/n)*(X.T@(y - y_pred) + coef)
+
+
+    def derivative_biais(self, y:np.array, y_pred:np.array, n:int, reg:str=None, coef:float=None)
+        """method to compute the derivatives of the biais depending on the current predictions
+
+        Args:
+            y (np.array): output training set
+            y_pred (np.array): output predictions
+            n (int): number of samples in training set
+            reg (str, optional): regularization function available are "lasso" and "ridge"
+            coef (float, optional): regularizations coefficient usually called lambda
+
+        Returns:
+            np.array: derivatives of the biais
+        """
+        if not reg:
+            return (1/n)*np.sum((y - y_pred))
+
+        assert coef, "can't compute regularized regression without lambda"
+
+        elif reg == "ridge":
+            return (1/n)*(np.sum((y - y_pred)) + coef*self.b)
+
+        elif reg == "lasso":
+            return (1/n)*(np.sum((y - y_pred)) + coef)
+
 
     def evaluate(self, x_test:np.array, y_test:np.array):
         """method to evaluate the model accuracy on the testing, which is normalized with same parameters as 
@@ -139,3 +201,6 @@ class LinearRegression:
     def accuracy(self):
         return self.error
 
+
+# dw = (1/n)*(X.T @(y - y_pred))
+# db = (1/n)*np.sum((y - y_pred))
