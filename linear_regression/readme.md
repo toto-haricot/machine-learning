@@ -8,13 +8,13 @@
 
 ### Notations ✏️
 
-Let's first introduce some notations to clarify our regression problem. Linear Regression is all about finding a set of parameters, that we note $\omega = (\omega_0, \omega_1, \omega_2, ... , \omega_d)$, which can map an input $x = (x_1, x_2, ... , x_d)$ to a corresponding target $y$ via a simple **linear combination**. The relation between $x$ and $y$ is then given by: <br>
+Let's first introduce some notations to clarify our regression problem. Linear Regression is all about finding a set of parameters $\omega = (\omega_0, \omega_1, \omega_2, ... , \omega_d)$ which map an input $x = (x_1, x_2, ... , x_d)$ to a corresponding target $y$ via a simple **linear combination**. The relation between $x$ and $y$ is then given by: <br>
 
 $$y = \omega_0 + x_1.\omega_1 + x_2.\omega2 + ... + x_d.\omega_d$$ <br>
 
 Here we will assume that $y$ is of dimension 1 and $x$ can be one any side, that we note $d$ (just like dimension). <br><br>
 
-The challenge is then to find the set of $d$ parameters $\omega = (\omega_0, \omega_1, \omega_2, ... , \omega_d)$ that are the most accurate at computing $y$ for a given $x$. Let's see how to compute $\omega$ <br><br>
+The challenge is then to find the set of $d + 1$ parameters $\omega = (\omega_0, \omega_1, \omega_2, ... , \omega_d)$ that are the most accurate at computing $y$ for a given $x$. <br><br>
 
 As always in machine learning, we study a dataset and we aim at finding a pattern in that dataset. In our case were a looking for a linear correlation between some inputs $x$ and corresponding outputs $y$. <br>
 
