@@ -52,7 +52,7 @@ $$\min_{\omega_0, \omega_1, \omega_2, ... , \omega_d} \sum_{i=1}^{n_{train}}(y_i
 
 To solve this problem, ie. to find the optimal set of parameters $\omega = (\omega_1, \omega_2, ... , \omega_d)$ we can define the loss function $J(\omega)$ such as : 
 
-$$J(\omega) = \sum_{i=1}^{n_{train}}(y_i - y_{pred,i})^2$$
+$$J(\omega) = \frac{1}{2*n_{train}}\sum_{i=1}^{n_{train}}(y_i - y_{pred,i})^2$$
 
 Let's jump to the matrix notation for more efficient computations. 
 
