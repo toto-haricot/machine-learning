@@ -23,7 +23,7 @@ In the `datasets/` folder you will find several classic open source datasets tha
 
 K-Means is a very simple-to-understand **clustering algorithm**. We start by setting the parameter K which represents the number of clusters we are looking for. Then we initialize K points at random as our clusters **centroïds**. As its name suggests, a centroïd is simply the center point of a cluster. Once our centroïds are randomly choosen, we compute for each point its Euclidien Distances to the centroïds. We form the clusters by assigning each point to its closest centroïd. After that we get K groups of data and we will compute the centers of these clusters which we will assign as the new centroïds. Then we can once again form the clusters, and compute the centroïds, and form new clusters, and compute the new centroïds and so on...<br>
 
-More details and illustrations on the K-Means algorithm will soon be available in the coming `k_mean/readme.md` file. <br><br>
+More details and illustrations on the K-Means algorithm will soon be available in the coming `k_mean/readme.md` file. Jump to [k_means](k_means/) repository. <br><br>
 
 ## Linear Regression 📈
 
@@ -31,9 +31,13 @@ Linear regression is probably the most common machine learning algorithm. Most o
 
 Our code is done in a way that allows the model to be used for multi-linear regression. <br><br>
 
+Jump to [linear_regression](linear_regression/) repository. <br><br>
+
 ## Linear Regression Regularized 👮
 
 A classic linear regression model can easily suffer from over-fitting especially when we deal with polynomial regression, which is not yet presented in this machine_learning repository. To avoid such a behaviour we can restrict the parameters $\omega$ to be not too large thanks to regularization. Our `LinearRegression()` class implemented in `linear_regression/` supports regularization. To do so you have to use the arguments *regularization_type* and *regularization_coef* arguments either in the `__init__()` of `fit()` method. <br><br>
+
+Jump to [linear_regression](linear_regression/) repository. <br><br>
 
 ## Logistic Regression 🤹
 
@@ -45,6 +49,8 @@ Logistic regression is probably the most famous classification algorithm. It is 
 
 *Code available and description coming very soon* <br><br>
 
+Jump to [linear_discriminant_analysis](linear_discriminant_analysis/) repository. <br><br>
+
 ## Multi Layer Perceptron 🚧
 
 *Coming soon* <br><br>
@@ -52,6 +58,8 @@ Logistic regression is probably the most famous classification algorithm. It is 
 ## Naïve Bayes ⛵
 
 *Code available and description coming very soon* <br><br>
+
+Jump to [naive_bayes](naive_bayes/) repository. <br><br>
 
 ## Quadratic Discriminant Analysis 🚧
 
