@@ -49,3 +49,5 @@ Then we just have to find $\mu$ and $\sigma$ for every data feature and every cl
 
 ## Requirements ☝️
 
+
+
