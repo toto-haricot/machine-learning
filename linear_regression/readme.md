@@ -88,6 +88,8 @@ Eventually we can rewrite the previously defined loss function with matrices : <
 
 $$J(\Omega) = (Y - Y_{pred})^T.(Y - Y_{pred}) = \|\vert Y - \hat{X}\Omega\|\vert^2$$ <br>
 
-Now we can compute the gradient of $J(\Omega)$ with respect to $\Omega$
+Now we can compute the gradient of $J(\Omega)$ with respect to $\Omega$. <br><br>
+
+*to be continued*
 
 
