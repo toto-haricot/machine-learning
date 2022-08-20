@@ -4,11 +4,9 @@
 
 *coming soon*
 
-
-
 ## Algorithm explained 👨‍🏫
 
-Linear Discriminant Analysis, commonly called LDA, is a supervised classification algorithm.
+Linear Discriminant Analysis, commonly called LDA, is a supervised classification algorithm. <br>
 
 ### LDA illustrated 🖼️
 
@@ -46,7 +44,9 @@ of the classes.
 
 <img src="https://github.com/toto-haricot/machine_learning/blob/master/_illustrations/LDA_readme_05.png" width="550">
 
-### LDA mathematics ✏️
+<br>
+
+### Notations and problem statement ✏️
 
 Now that we have a better idea of how LDA works, let's go through how the algorithm really operates so that we finally have
 everything we need to implement it from scratch. 
@@ -71,27 +71,35 @@ y_{2} \\
 y_{n}
 \end{bmatrix}$$
 
-LDA make the two following assumptions : 
+<br>
 
-- Each class follows a Gaussian distribution
-- All attributes have the same variance
+### Finally some maths 🧮
 
-The aim of the training of LDA is then to approximate the parameters of each class. Assuming that these classes are 
-Gaussian shaped, the parameters to determine are the mean $\mu_{k}$ with $k$ one of the $K$ classes and the covariance 
-$\sigma$. The fact that $\sigma$ does not depend on $k$ is due to assumption (2). Indeed in LDA we suppose that the 
-variance of all gaussian (that represent the classes) is the same. That means that the shapes of gaussians will all be
-the same, only the position (parametrized by $mu_k$) will change. We can illustrate that with the following graph. 
+LDA is a discriminative model, that means that it will learn the boundary between classes so that when it will have to predict
+the label of a new data point it will be able to give the probability of the point to belong to each class. Then it will just
+assign the point to the most likely class. Ok so we want to be able to compute the probability to belong to each class for any
+data point $x$, let's try to express $P(Y = c_k | X = x)$ ie. the probability that $x$ belong to the class $k$.
+
+The **Bayes theorem** states that : 
+
+$$P(Y = c_k | X = x) = \frac{P(X = x | Y = c_k).P(Y = c_k)}{P(X = x)}$$
+
+Let's see how we can express each term one by one. 
+
+- $P(X = x | Y = c_k)$ is the likelihood. We have an expression thanks to the fact that we have assumed that the classes 
+followed Gaussian distributions. We know that the density function of a gaussian distribution is such as :
+
+$$P(X = x | Y = c_k) = \frac{1}{\sqrt{2\pi\Sigma_k}} \exp{(-\frac{1}{2}(x - \mu_k)^{T}\Sigma_k^{-1}(x - \mu_k))}$$
+
+And we can see that the only things we need to determine are $\mu_k$ and $\Sigma_k$
+
+- ...
 
 
 
-Let's assume that we have already divided our dataset into training and testing sets and so we can use the training 
-set $X_{train}$ to estimate the aforementionned parameters. The estimation of $\mu_{k}$ is pretty straightforward : 
 
-$$ \mu_{k} = 1/n_k \sum_{x_i \in k} x_i$$
 
-With $n_k$ the number of data points in the class $k$. And the estimation of the covariance $\sigma_k$ is given by : 
 
-$$  $$
 
 
 
