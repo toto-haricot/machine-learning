@@ -46,7 +46,30 @@ of the classes.
 
 <img src="https://github.com/toto-haricot/machine_learning/blob/master/_illustrations/LDA_readme_05.png" width="550">
 
-### Notations and assumptions ✏️
+### LDA mathematics ✏️
+
+Now that we have a better idea of how LDA works, let's go through how the algorithm really operates so that we finally have
+everything we need to implement it from scratch. 
+
+**Problem statement** : Let's suppose that we have a $K$ class classification problem. Our data set is called $X$ and its
+number of data points is $n$. The training and testing sets are $X_{train}$ and $X_{test}$ with respective lengths of 
+$n_{train}$ and $n_{test}$. The number of features is $d$ (just like d) and the classes are noted $c_k$ with $k$ between 1
+and $K$. The vector containing the classes, sometimes also refered to as labels, is noted $y$ and each $y_i$ is equal to a
+certain $c_k$. 
+
+$$X = \begin{bmatrix}
+x_{1,1} & x_{1,2} & ... & x_{1,d} \\
+x_{2,1} & x_{2,2} & ... & x_{2,d} \\
+... & ... & ... & ... \\
+x_{n,1} & x_{n,2} & ... & x_{n,d}
+\end{bmatrix}$$
+
+$$Y = \begin{bmatrix}
+y_{1} \\
+y_{2} \\
+... \\
+y_{n}
+\end{bmatrix}$$
 
 LDA make the two following assumptions : 
 
