@@ -90,6 +90,6 @@ $$J(\Omega) = (Y - Y_{pred})^T.(Y - Y_{pred}) = \|\vert Y - \hat{X}\Omega\|\vert
 
 Now we can compute the gradient of $J(\Omega)$ with respect to $\Omega$. <br><br>
 
-*to be continued*
+*to be continued..*
 
 
