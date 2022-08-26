@@ -1,6 +1,6 @@
 # Machine Learning 👩‍💻
 
-In this repository we present an **implementation from scratch**, using only `numpy` and python most basic libraries, of the classical machine learning algorithms. Here comes the list of all algorithms we wish to implement : 
+In this repository we present an **implementation from scratch**, using only `numpy` and python most basic libraries, of the classical machine learning algorithms. The following algorithms are reviewed :
 
 - [x] [K-Means](#k-means-)
 - [x] [Linear Regression](#linear-regression-)
