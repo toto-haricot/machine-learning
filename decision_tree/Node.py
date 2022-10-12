@@ -1,27 +1,21 @@
-import DecisionTree
 
 class Node():
+    """This class represent a decision tree node.
 
-    def __init__(self):
+    Parameters:
+    -----------
 
+    """
+
+    def __init__(self, attribute=None, threshold=None, value=None, left_branch=None, 
+                right_branch=None):
         # decision parameters
-        self.decision_attribute = None
-        self.decision_threshold = None
-
-        # caracteristics
-        self.indices = None
-        self.impurity = None
-
-        # node links
-        self.parent = None
-        self.position = None
-        self.child_left = None
-        self.child_right = None
-
-        # node position in the tree
-        self.leaf = False 
-        self.root = False
-        self.depth = None
+        self.decision_attribute = attribute
+        self.decision_threshold = threshold
+        self.value = value
+        # child nodes
+        self.child_left = left_branch
+        self.child_right = right_branch
 
 
     def find_decision(self):
