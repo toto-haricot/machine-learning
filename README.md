@@ -1,13 +1,13 @@
 # Machine Learning 👩‍💻
 
-In this repository we present an **implementation from scratch**, using only `numpy` and python most basic libraries, of the classical machine learning algorithms. Here comes the list of all algorithms we wish to implement : 
+In this repository we present an **implementation from scratch**, using only `numpy` and python most basic libraries, of the classical machine learning algorithms. We will go through the following algorithms :
 
 - [x] [K-Means](#k-means-)
 - [x] [Linear Regression](#linear-regression-)
 - [x] [Linear Regression Regularized](#linear-regression-regularized-)
 - [x] [Logistic Regression](#logistic-regression-)
 - [x] [Linear Discriminant Analysis](#linear-discriminant-analysis-)
-- [ ] [Multi Layer Perceptron](#multi-layer-perceptron-)
+- [x] [Multi Layer Perceptron](#multi-layer-perceptron-)
 - [x] [Naïve Bayes](#naïve-bayes-)
 - [ ] [Quadratic Discriminant Analysis](#quadratic-discriminant-analysis-)
 - [x] [Random Forest](#random-forest-)
@@ -43,12 +43,12 @@ Logistic regression is probably the most famous classification algorithm. It is 
 
 ## [Linear Discriminant Analysis](/linear_discriminant_analysis) 🕵
 
-*Code available and description coming very soon* <br><br>
+Linear Discriminant Analysis is a fundamental discriminative model. It can be used for classification but also for dimension reduction. In this repository we only tackle classfication for the moment. It's not a hard-to-understand algorithm and it is very beneficial to take a bit of time the step into how it is built. This is why we recommand you to take a look to the implementation in [`LDA.py`](/linear_discriminant_analysis/LDA.py), the case-study which is an application of LDA for classification on the iris dataset thanks to the notebook [`LDANotebook.ipynb`](/linear_discriminant_analysis/LDANotebook.ipynb) and have a glance to the [`readme.md`](/linear_discriminant_analysis/readme.md) to get a global overview of how the algorithm works. 
 
 
-## Multi Layer Perceptron 🚧
+## [Multi Layer Perceptron](/multi_layer_perceptron) ⛓️
 
-*Coming soon* <br><br>
+*First draft of code available and description coming very soon* <br><br>
 
 
 ## [Naïve Bayes](/naive_bayes) ⛵
